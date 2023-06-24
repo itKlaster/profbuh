@@ -1,38 +1,64 @@
 import { useParams } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Typography,
-} from "@material-tailwind/react";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-
-const articles = [
-  {
-    id: 1,
-    img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-    title:
-      "  Like so many organizations these days, Autodesk is a company intransition. It was until recently a traditional boxed software companyselling licenses. Yet its own business model disruption is only partof the story",
-  },
-  {
-    id: 2,
-    img: "https://images.unsplash.com/photo-1648114773131-321c91371212?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1466&q=80",
-    title:
-      " Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  },
-  {
-    id: 3,
-    img: "https://images.unsplash.com/photo-1686848033365-7521510f91a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    title:
-      " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  },
-];
+import { Typography } from "@material-tailwind/react";
+import { useEffect } from "react";
+import { useArticles } from "../hooks/use-articals";
 
 export const Article = () => {
   let { id } = useParams();
-  const artcleData = articles.find((item) => item.id === id);
-  // const item = props.article.filter((item) => item.id === itemID);
+  const { article, getArticle } = useArticles();
+  useEffect(() => {
+    getArticle(id);
+  }, []);
 
-  return <div>artivle {}</div>;
+  console.log(article);
+
+  return (
+    <div className="flex justify-center">
+      <div className="w-container px-2 flex justify-center items-start mt-10 flex-col">
+        <Typography color="gray" className="mb-8 text-3xl text-left font-bold">
+          {/* {article?.data.data.title} */}
+          test
+        </Typography>
+        {article?.data.data.topics.map((topic, index) => (
+          <li key={index}>
+            <a className="underline" href={"#" + index}>
+              {/* {topic.subtitle} */}
+            </a>
+          </li>
+        ))}
+
+        <div className="mt-5 w-full flex flex-col gap-10 mb-20">
+          {article?.data.data.topics.map((topic, index) => (
+            <div key={index} className="" id={index}>
+              <Typography
+                color="gray"
+                className="font-normal mb-4 text-2xl text-left"
+              >
+                test
+                {/* {topic.subtitle} */}
+              </Typography>
+              <div className="flex flex-col gap-5 md:flex-row ">
+                <div className="w-full shrink-0 m-0 rounded-r-xl md:w-2/5 md:rounded-r-none">
+                  <img
+                    className="w-full h-full object-cover rounded"
+                    src={"data:image/png;base64," + topic.image}
+                    alt=""
+                  />
+                </div>
+                <Typography
+                  color="gray"
+                  className="font-normal mb-8 flex flex-col "
+                >
+                  {topic.text}
+                  <span className="bg-blue-400 self-start rounded p-2 text-white mt-4 cursor-pointer">
+                    {/* {topic.start} - {topic.end} */}
+                  </span>
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
