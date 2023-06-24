@@ -13,6 +13,11 @@ const config = withMT({
       width: {
         container: "1200px",
       },
+      colors: {
+        bgColor: { 100: "#1e293b", 200: "#181C20", 300: "#004AA5" },
+        textColor: { 100: "#ffffff", 200: "#d4d4d4" },
+        main: "#42A5F5",
+      },
     },
   },
   plugins: [],

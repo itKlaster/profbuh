@@ -11,11 +11,12 @@ import { useArticles } from "../hooks/use-articals";
 export const ArticleItem = () => {
   const { articles } = useArticles();
 
+  console.log(articles);
   return (
-    <div>
+    <div className="w-full">
       {articles?.map((item) => (
         <Card
-          className="flex-col w-4/5 max-w-[48rem] mt-10 mb-10 ml-auto mr-auto md:flex-row md:w-full"
+          className="flex-col w-full my-10 ml-auto mr-auto md:flex-row rounded-lg overflow-hidden bg-bgColor-200 text-textColor-200"
           key={item.id}
         >
           <CardHeader
@@ -29,25 +30,22 @@ export const ArticleItem = () => {
               className="w-full h-full object-cover"
             />
           </CardHeader>
-          <CardBody className="overflow-hidden">
-            <Typography color="gray" className="font-normal mb-8 text-2xl">
+          <CardBody className="overflow-hidden bg-bgColor-200">
+            <Typography
+              color="gray"
+              className="font-normal mb-8 text-2xl text-textColor-100"
+            >
               {item.data.title}
             </Typography>
 
-            <Typography
-              color="gray"
-              className="font-normal mb-8  truncate max-h-40"
-            >
-              {item.data.description}
+            <Typography className="font-normal mb-8 max-h-40">
+              {item.data.description.length > 200
+                ? item.data.description.slice(0, 200) + "..."
+                : item.data.description}
             </Typography>
 
             <Link to={"article/" + item?.id} className="flex justify-end mr-5 ">
-              <Button
-                variant="text"
-                className="flex items-center gap-2 text-purple-800 rounded-full border border-purple-600 hover:bg-purple-100"
-              >
-                Подробнее
-              </Button>
+              <Button className="flex items-center gap-3">Подробнее</Button>
             </Link>
           </CardBody>
         </Card>
