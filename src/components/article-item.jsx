@@ -26,11 +26,11 @@ export const ArticleItem = () => {
 
   const newArr = article.map((item) => {
     return (
-      <Card className="flex-row w-full max-w-[48rem] mt-10 mb-5" key={item.id}>
+      <Card className="flex-col w-4/5 max-w-[48rem] mt-10 mb-5 ml-auto mr-auto sm:flex-row sm:w-full" key={item.id}>
         <CardHeader
           shadow={false}
           floated={false}
-          className="w-2/5 shrink-0 m-0 rounded-r-none"
+          className="w-full shrink-0 m-0 rounded-r-xl sm:w-2/5 sm:rounded-r-none"ы
         >
           <img
             src={item.img}
