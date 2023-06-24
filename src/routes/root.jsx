@@ -1,5 +1,6 @@
 import { Button, Input } from "@material-tailwind/react";
 import { ArticleItem } from "../components/article-item";
+import { SimpleFooter }  from "../components/footer";
 
 export const Root = () => {
   return (
@@ -10,6 +11,7 @@ export const Root = () => {
           <Button className=" bg-purple-800">Искать</Button>
         </div>
         <ArticleItem  />
+        <SimpleFooter />
       </div>
     </div>
   );
