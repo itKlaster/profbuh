@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import articleData from "./cringe.json";
-import articlesData from "./asd.json";
 
-const GET_ARTICLES = "http://192.168.1.210:1337/api/articles";
+const GET_ARTICLES = "http://localhost:1337/api/articles";
 
 export const useArticles = () => {
-  const [articles] = useState(articlesData.data);
-  const [article, setArticle] = useState(articleData.data);
+  const [articles, setArticles] = useState([]);
+  const [article, setArticle] = useState({});
 
   useEffect(() => {
     // getArticles();
