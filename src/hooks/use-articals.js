@@ -7,18 +7,18 @@ export const useArticles = () => {
   const [article, setArticle] = useState({});
 
   useEffect(() => {
-    // getArticles();
+    getArticles();
   }, []);
 
-  // async function getArticles() {
-  //   fetch(GET_ARTICLES)
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       return data.data.filter((article) => !!article.data.title);
-  //     })
-  //     .then((articlses) => setArticles(articlses));
-  // }
+  async function getArticles() {
+    fetch(GET_ARTICLES)
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+        return data.data.filter((article) => !!article.data.title);
+      })
+      .then((articlses) => setArticles(articlses));
+  }
 
   async function getArticle(id) {
     fetch(GET_ARTICLES + "/" + id)
