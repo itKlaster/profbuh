@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const GET_ARTICLES = "http://192.168.1.210:1337/api/articles";
+const GET_ARTICLES = import.meta.env.VITE_URL_API + "/api/articles";
 
 export const useArticles = () => {
   const [articles, setArticles] = useState([]);
