@@ -34,7 +34,7 @@ export const ArticleItem = () => {
               className="w-full h-full object-cover"
             />
           </CardHeader>
-          <CardBody className="overflow-hidden bg-bgColor-200">
+          <CardBody className="overflow-hidden bg-white text-black flex flex-col">
             <Typography
               color="gray"
               className="font-normal mb-3 truncate text-2xl text-black"

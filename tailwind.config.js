@@ -20,7 +20,10 @@ const config = withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["forest"]
+  }
 });
 
 export default config;
