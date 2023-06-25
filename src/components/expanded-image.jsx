@@ -6,7 +6,7 @@ export const ExpandedImage = () => {
 
   return (
     <div
-      className="w-full h-screen fixed bg-bgColor-100 flex justify-center items-center z-20 cursor-pointer flex-col text-textColor"
+      className="w-full h-screen fixed left-0 top-0 backdrop-blur-md flex justify-center items-center z-20 cursor-pointer flex-col text-textColor"
       onClick={hideImage}
     >
       <img src={image} className="max-h-4/5 max-w-4/5" />
