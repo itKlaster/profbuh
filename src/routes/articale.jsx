@@ -109,9 +109,26 @@ export const Article = () => {
                       </div>
                     ))}
 
-                  <span className="bg-blue-400 self-start rounded px-4 py-2 mt-5 cursor-pointer text-textColor-100">
-                    {topic.start} - {topic.end}
-                  </span>
+                    <span className="bg-blue-400 self-start rounded px-4 py-2 mt-5 cursor-pointer text-textColor-100">
+                      {topic.start} - {topic.end}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {topic.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className="m-0 rounded-xl flex-grow"
+                        onClick={() =>
+                        }
+                      >
+                        <img
+                          className="w-full h-full object-cover rounded-md cursor-pointer"
+                          src={image.startsWith('http') ? image : "data:image/png;base64," + image}
+                          alt=""
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
