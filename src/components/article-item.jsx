@@ -14,6 +14,10 @@ export const ArticleItem = () => {
   console.log(articles);
   return (
     <div className="w-full">
+      <div className="flex justify-between items-end">
+        <h1 className="text-5xl font-bold text-white">Список постов</h1>
+        <h1 className="text-2xl font-bold text-gray-400">{articles.length} всего</h1>
+      </div>
       {articles?.map((item) => (
         <Card
           className="flex-col w-full my-10 ml-auto mr-auto md:flex-row rounded-lg overflow-hidden bg-bgColor-200 text-textColor-200"
