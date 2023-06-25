@@ -53,7 +53,6 @@ export const Article = () => {
   }, [article]);
 
   return (
-    <div className="flex justify-center text-textColor-200 bg-bgColor-100">
       <ExpandedImageContext.Provider value={fullImage}>
         {fullImage.image && <ExpandedImage />}
       </ExpandedImageContext.Provider>
@@ -74,6 +73,13 @@ export const Article = () => {
               <a className="underline hover:text-main" href={"#" + index}>
                 {topic.title}
               </a>
+    <>
+      <header class="container mx-auto py-10 flex justify-between">
+        <div class="logo text-4xl font-black">БухЭксперт8</div>
+        <nav>
+          <ul class="flex gap-x-3">
+            <li>
+              <button class="btn btn-primary px-10 py-2 rounded-lg text-white">Главная</button>
             </li>
           ))}
         </div>
