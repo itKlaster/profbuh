@@ -1,46 +1,69 @@
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,
   Typography,
 } from "@material-tailwind/react";
-import { ArrowLongRightIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+import { useArticles } from "../hooks/use-articals";
 
 export const ArticleItem = () => {
+  const { articles } = useArticles();
+
+  console.log(articles);
   return (
-    <Card className="flex-row w-full max-w-[48rem] mt-10">
-      <CardHeader
-        shadow={false}
-        floated={false}
-        className="w-2/5 shrink-0 m-0 rounded-r-none"
-      >
-        <img
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"
-          alt="image"
-          className="w-full h-full object-cover"
-        />
-      </CardHeader>
-      <CardBody>
-        <Typography variant="h6" color="blue" className="uppercase mb-4">
-          startups
-        </Typography>
-        <Typography variant="h4" color="blue-gray" className="mb-2">
-          Lyft launching cross-platform service this week
-        </Typography>
-        <Typography color="gray" className="font-normal mb-8">
-          Like so many organizations these days, Autodesk is a company in
-          transition. It was until recently a traditional boxed software company
-          selling licenses. Yet its own business model disruption is only part
-          of the story
-        </Typography>
-        <a href="#" className="inline-block">
-          <Button variant="text" className="flex items-center gap-2">
-            Learn More
-            <ArrowLongRightIcon strokeWidth={2} className="w-4 h-4" />
-          </Button>
-        </a>
-      </CardBody>
-    </Card>
+    <div className="w-full">
+      <div className="flex justify-between items-end">
+        <h1 className="text-5xl font-bold text-white">Список постов</h1>
+        <h1 className="text-2xl font-bold text-gray-400">
+          {articles.length} всего
+        </h1>
+      </div>
+      {articles?.map((item) => (
+        <Card
+          className="flex-col w-full my-10 ml-auto mr-auto md:flex-row rounded-lg overflow-hidden bg-bgColor-1\200 text-textColor-200"
+          key={item.id}
+        >
+          <CardHeader
+            shadow={false}
+            floated={false}
+            className="w-full shrink-0 m-0 rounded-r-xl md:w-2/5 md:rounded-r-none"
+          >
+            <img
+              src={
+                item.data.topics[0].images[0].startsWith("http")
+                  ? item.data.topics[0].images[0]
+                  : `data:image/png;base64,${item.data.topics[0].images[0]}`
+              }
+              alt="image"
+              className="w-full h-full object-cover scale-110"
+            />
+          </CardHeader>
+          <CardBody className="overflow-hidden bg-white text-black flex flex-col">
+            <Typography
+              color="gray"
+              className="font-normal mb-3 truncate text-2xl text-black"
+            >
+              {item.data.title}
+            </Typography>
+
+            <Typography className="font-normal mb-8 max-h-40">
+              {item.data.description.length > 200
+                ? item.data.description.slice(0, 200) + "..."
+                : item.data.description}
+            </Typography>
+
+            <Link
+              to={"article/" + item?.id}
+              className="flex justify-end mt-auto"
+            >
+              <button className="btn btn-primary btn-wide text-white">
+                Подробнее
+              </button>
+            </Link>
+          </CardBody>
+        </Card>
+      ))}
+    </div>
   );
 };

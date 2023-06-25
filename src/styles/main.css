@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: 'Nunito Sans', sans-serif !important;
+}
+
+.rubik, input, button {
+    font-family: 'Rubik', sans-serif !important;
+}
+
+
+.html-ignore h1 {
+    @apply text-4xl text-white print:text-black;
+}
+
+.html-ignore h2 {
+    @apply text-3xl text-white mt-8 print:text-black mb-7;
+}
+
+.html-ignore p {
+    @apply text-lg text-gray-300 print:text-black mt-2;
+}
+
+.html-ignore .images-row {
+    @apply grid grid-cols-3 gap-x-10 my-10 print:text-black print:flex-col print:flex print:gap-y-5;
+}
