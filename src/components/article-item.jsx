@@ -37,7 +37,7 @@ export const ArticleItem = () => {
           <CardBody className="overflow-hidden bg-bgColor-200">
             <Typography
               color="gray"
-              className="font-normal mb-8 text-2xl text-textColor-100"
+              className="font-normal mb-3 truncate text-2xl text-black"
             >
               {item.data.title}
             </Typography>
@@ -48,8 +48,8 @@ export const ArticleItem = () => {
                 : item.data.description}
             </Typography>
 
-            <Link to={"article/" + item?.id} className="flex justify-end mr-5 ">
-              <Button className="flex items-center gap-3">Подробнее</Button>
+            <Link to={"article/" + item?.id} className="flex justify-end mt-auto">
+              <button className="btn btn-primary btn-wide text-white">Подробнее</button>
             </Link>
           </CardBody>
         </Card>
