@@ -5,11 +5,11 @@ export const Root = () => {
   return (
     <>
       <header class="container mx-auto py-10 flex justify-between">
-        <div class="logo text-4xl font-black">БухЭксперт8</div>
+        <div class="logo text-3xl font-black ml-5 md:text-4xl">БухЭксперт8</div>
         <nav>
           <ul class="flex gap-x-3">
             <li>
-              <button class="btn btn-primary px-10 py-2 rounded-lg text-white">
+              <button class="btn btn-primary px-10 py-2 rounded-lg text-white w-3/4">
                 Главная
               </button>
             </li>
