@@ -25,7 +25,7 @@ export const ArticleItem = () => {
             className="w-full shrink-0 m-0 rounded-r-xl md:w-2/5 md:rounded-r-none"
           >
             <img
-              src={`data:image/png;base64,${item.data.topics[0].images[0]}`}
+              src={item.data.topics[0].images[0].startsWith('http') ? item.data.topics[0].images[0] : `data:image/png;base64,${item.data.topics[0].images[0]}`}
               alt="image"
               className="w-full h-full object-cover"
             />
