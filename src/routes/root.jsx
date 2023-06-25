@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArticleItem } from "../components/article-item";
 
 export const Root = () => {
@@ -8,9 +9,11 @@ export const Root = () => {
         <nav>
           <ul className="flex gap-x-3">
             <li>
-              <button className="btn btn-primary px-10 py-2 rounded-lg text-white">
-                Главная
-              </button>
+              <Link to="/">
+                <button className="btn btn-primary px-10 py-2 rounded-lg text-white">
+                  Главная
+                </button>
+              </Link>
             </li>
           </ul>
         </nav>
