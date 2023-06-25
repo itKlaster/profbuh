@@ -21,18 +21,34 @@ export const Article = () => {
 
   useEffect(() => {
     if (article) {
-      const newTopics = article.data.topics.map((topic) => ({
-        title: topic.title,
-        images: topic.images,
-        paragraphs: topic.paragraphs.split("\n").map((line) => ({
-          time: line.split("-")[0].replace("[", "").replace("]", ""),
-          text: line.split("-")[1],
-        })),
-        start: topic.start,
-        end: topic.end,
-      }));
+      console.log('art', article)
+      setTimeout(() => {
+        const newTopics = article.data.data.topics.map((topic) => ({
+          title: topic.title,
+          images: topic.images,
+          paragraphs: topic.paragraphs.split("\n").map((line) => {
+            const regex = /^\[(\d{1,2}:\d{2}:\d{2})\s*-\s*(\d{1,2}:\d{2}:\d{2})\]\s*(.*)$/;
+            const found = line.match(regex);
 
-      setTopics(newTopics);
+            if (!found) return {
+              text: line,
+              from: null
+            }
+
+
+            return {
+              fallback: found[0],
+              from: found[1],
+              to: found[2],
+              text: found[3],
+            }
+          }),
+          start: topic.start,
+          end: topic.end,
+        }));
+
+        setTopics(newTopics);
+      }, 200)
     }
   }, [article]);
 
