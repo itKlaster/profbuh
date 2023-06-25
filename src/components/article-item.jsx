@@ -31,7 +31,7 @@ export const ArticleItem = () => {
             <img
               src={item.data.topics[0].images[0].startsWith('http') ? item.data.topics[0].images[0] : `data:image/png;base64,${item.data.topics[0].images[0]}`}
               alt="image"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover scale-110"
             />
           </CardHeader>
           <CardBody className="overflow-hidden bg-white text-black flex flex-col">
