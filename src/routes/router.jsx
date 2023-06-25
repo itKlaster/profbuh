@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Root } from "./root";
 import { Article } from "./articale";
+import { ArticleRoot } from "./articleRoot";
+import { ArticleHtml } from "./article-html";
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +11,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "article/:id",
-    element: <Article />,
+    element: <ArticleRoot />,
+    children: [
+      { index: true, element: <Article /> },
+      { path: "json", element: <Article /> },
+      { path: "html", element: <ArticleHtml /> },
+    ],
   },
 ]);

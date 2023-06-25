@@ -6,7 +6,7 @@ export const Root = () => {
     <>
       <header className="container mx-auto py-10 flex justify-between">
         <div className="logo text-4xl font-black">БухЭксперт8</div>
-        <nav>
+        <nav className="not-sr-only">
           <ul className="flex gap-x-3">
             <li>
               <Link to="/">

@@ -10,3 +10,20 @@
 .rubik, input, button {
     font-family: 'Rubik', sans-serif !important;
 }
+
+
+.html-ignore h1 {
+    @apply text-4xl text-white print:text-black;
+}
+
+.html-ignore h2 {
+    @apply text-3xl text-white mt-8 print:text-black mb-7;
+}
+
+.html-ignore p {
+    @apply text-lg text-gray-300 print:text-black mt-2;
+}
+
+.html-ignore .images-row {
+    @apply grid grid-cols-3 gap-x-10 my-10 print:text-black print:flex-col print:flex print:gap-y-5;
+}

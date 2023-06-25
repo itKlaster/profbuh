@@ -7,13 +7,23 @@ import { useExpandedImage } from "../hooks/use-expanded-image";
 import { ExpandedImage } from "../components/expanded-image";
 import { ExpandedImageContext } from "../context";
 import { Link } from "react-router-dom";
-import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 
 export const Article = () => {
+  const [time, setTime] = useState(true);
   let { id } = useParams();
   const [topics, setTopics] = useState();
   const { article, getArticle } = useArticles();
   const fullImage = useExpandedImage();
+
+  function handleClickTime() {
+    setTime((prev) => !prev);
+  }
+
+  function handlePrint() {
+    window.print();
+  }
+
+  console.log(article.data?.url);
 
   useEffect(() => {
     getArticle(id);
@@ -55,36 +65,31 @@ export const Article = () => {
 
   return (
     <>
-      <header className="container mx-auto py-10 flex justify-between">
-        <div className="logo text-4xl font-black">БухЭксперт8</div>
-        <nav>
-          <ul className="flex gap-x-3">
-            <li>
-              <Link to="/">
-                <button className="btn btn-primary px-10 py-2 rounded-lg text-white">
-                  Главная
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <div className="container mx-auto text-textColor-200">
+      <div className="container mx-auto text-textColor-200 print:text-black">
         <ExpandedImageContext.Provider value={fullImage}>
           {fullImage.image && <ExpandedImage />}
         </ExpandedImageContext.Provider>
-        <div className="w-container px-2 flex justify-center items-start mt-10 flex-col">
-          <Link to="/">
-            <Button className="flex items-center gap-2">
-              <ArrowLongLeftIcon className="w-4 h-4" /> Назад
+        <div className=" px-2 flex justify-center items-start mt-10 flex-col">
+          <div className="flex justify-end w-full gap-5 print:hidden px-2">
+            <Button onClick={handlePrint}>распечатать</Button>
+            <Button
+              onClick={handleClickTime}
+              className="flex items-center gap-2"
+            >
+              время
             </Button>
-          </Link>
-          <Typography className="mb-8 text-4xl text-left font-bold text-textColor-100 mt-10">
+            <Link to={"/article/" + id + "/html"}>
+              <Button className="flex items-center gap-2">html</Button>
+            </Link>
+          </div>
+          <Typography className="mb-8 text-4xl text-left font-bold text-textColor-100 mt-10 print:text-black">
             {article?.data?.data?.title}
           </Typography>
           <Typography className="">{article?.data?.description}</Typography>
           <div className="mt-5">
-            <span className="text-textColor-100 text-2xl"> Содержание:</span>
+            <span className="text-textColor-100 text-2xl print:text-black">
+              Содержание:
+            </span>
             {article?.data?.data?.topics?.map((topic, index) => (
               <li key={index} className="mt-2">
                 <a className="underline hover:text-main" href={"#" + index}>
@@ -96,17 +101,30 @@ export const Article = () => {
           <div className="w-full flex flex-col gap-20 mb-20 mt-14">
             {topics?.map((topic, index) => (
               <div key={index} className="" id={index}>
-                <Typography className="font-normal mb-4 text-2xl text-left text-textColor-100 mt-5">
+                <Typography className="font-normal mb-4 text-2xl text-left text-textColor-100 mt-5 print:text-black">
                   {topic.title}
                 </Typography>
                 <div className="flex flex-col gap-5 ">
                   <div className="font-normal mb-8 flex flex-col ">
                     {topic.paragraphs.map(({ from, text }, index) => (
-                      <div key={index} className="flex gap-5 mt-2">
-                        {from ? (
+                      <div key={index} className="flex gap-5 mt-2 items-center">
+                        {from && time ? (
                           <a
-                            href="#"
-                            className="p-1 px-2 hover:bg-main bg-bgColor-200 text-textColor-100 self-start rounded-md"
+                            target="_blank"
+                            rel="noreferrer"
+                            href={
+                              article.data?.url
+                                ? article.data?.url +
+                                  "&t=" +
+                                  from.split(":")[0] +
+                                  "h" +
+                                  from.split(":")[1] +
+                                  "m" +
+                                  from.split(":")[2] +
+                                  "s"
+                                : "#"
+                            }
+                            className="p-1 px-2 hover:bg-main bg-bgColor-200 text-textColor-100 self-start rounded-md print:text-black"
                           >
                             {from}
                           </a>
@@ -114,12 +132,20 @@ export const Article = () => {
                         <p className={from ? "ml-0" : "ml-[103px]"}>{text}</p>
                       </div>
                     ))}
-
-                    <span className="bg-blue-400 self-start rounded px-4 py-2 mt-5 cursor-pointer text-textColor-100">
-                      {topic.start} - {topic.end}
-                    </span>
+                    {time && (
+                      <a
+                        target="_blank"
+                        rel="noreferrer"
+                        href={article.data?.url || "#"}
+                        className="mt-5 cursor-pointer"
+                      >
+                        <span className="bg-blue-400 self-start rounded px-4 py-2 text-textColor-100">
+                          {topic.start} - {topic.end}
+                        </span>
+                      </a>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 print:flex-col print:gap-y-5">
                     {topic.images.map((image, index) => (
                       <div
                         key={index}
