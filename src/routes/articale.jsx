@@ -21,45 +21,48 @@ export const Article = () => {
 
   useEffect(() => {
     if (article) {
-      console.log('art', article)
+      console.log("art", article);
       setTimeout(() => {
         const newTopics = article.data.data.topics.map((topic) => ({
           title: topic.title,
           images: topic.images,
           paragraphs: topic.paragraphs.split("\n").map((line) => {
-            const regex = /^\[(\d{1,2}:\d{2}:\d{2})\s*-\s*(\d{1,2}:\d{2}:\d{2})\]\s*(.*)$/;
+            const regex =
+              /^\[(\d{1,2}:\d{2}:\d{2})\s*-\s*(\d{1,2}:\d{2}:\d{2})\]\s*(.*)$/;
             const found = line.match(regex);
 
-            if (!found) return {
-              text: line,
-              from: null
-            }
-
+            if (!found)
+              return {
+                text: line,
+                from: null,
+              };
 
             return {
               fallback: found[0],
               from: found[1],
               to: found[2],
               text: found[3],
-            }
+            };
           }),
           start: topic.start,
           end: topic.end,
         }));
 
         setTopics(newTopics);
-      }, 200)
+      }, 200);
     }
   }, [article]);
 
   return (
     <>
-      <header class="container mx-auto py-10 flex justify-between">
-        <div class="logo text-4xl font-black">БухЭксперт8</div>
+      <header className="container mx-auto py-10 flex justify-between">
+        <div className="logo text-4xl font-black">БухЭксперт8</div>
         <nav>
-          <ul class="flex gap-x-3">
+          <ul className="flex gap-x-3">
             <li>
-              <button class="btn btn-primary px-10 py-2 rounded-lg text-white">Главная</button>
+              <button className="btn btn-primary px-10 py-2 rounded-lg text-white">
+                Главная
+              </button>
             </li>
           </ul>
         </nav>
@@ -95,17 +98,18 @@ export const Article = () => {
                   {topic.title}
                 </Typography>
                 <div className="flex flex-col gap-5 ">
-                 
                   <div className="font-normal mb-8 flex flex-col ">
-                    {topic.paragraphs.map(({ from, to, fallback, text }, index) => (
+                    {topic.paragraphs.map(({ from, text }, index) => (
                       <div key={index} className="flex gap-5 mt-2">
-                        {from ? <a
-                          href="#"
-                          className="p-1 px-2 hover:bg-main bg-bgColor-200 text-textColor-100 self-start rounded-md"
-                        >
-                          {from}
-                        </a> : null}
-                        <p className={from ? 'ml-0' : 'ml-[103px]'}>{text}</p>
+                        {from ? (
+                          <a
+                            href="#"
+                            className="p-1 px-2 hover:bg-main bg-bgColor-200 text-textColor-100 self-start rounded-md"
+                          >
+                            {from}
+                          </a>
+                        ) : null}
+                        <p className={from ? "ml-0" : "ml-[103px]"}>{text}</p>
                       </div>
                     ))}
 
@@ -119,12 +123,20 @@ export const Article = () => {
                         key={index}
                         className="m-0 rounded-xl flex-grow"
                         onClick={() =>
-                          fullImage.showImage(image.startsWith('http') ? image : "data:image/png;base64," + image)
+                          fullImage.showImage(
+                            image.startsWith("http")
+                              ? image
+                              : "data:image/png;base64," + image
+                          )
                         }
                       >
                         <img
                           className="w-full h-full object-cover rounded-md cursor-pointer"
-                          src={image.startsWith('http') ? image : "data:image/png;base64," + image}
+                          src={
+                            image.startsWith("http")
+                              ? image
+                              : "data:image/png;base64," + image
+                          }
                           alt=""
                         />
                       </div>
