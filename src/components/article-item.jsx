@@ -20,7 +20,7 @@ export const ArticleItem = () => {
       </div>
       {articles?.map((item) => (
         <Card
-          className="flex-col w-full my-10 ml-auto mr-auto md:flex-row rounded-lg overflow-hidden bg-bgColor-200 text-textColor-200"
+          className="flex-col w-full my-10 ml-auto mr-auto md:flex-row rounded-lg overflow-hidden bg-bgColor-1\200 text-textColor-200"
           key={item.id}
         >
           <CardHeader
