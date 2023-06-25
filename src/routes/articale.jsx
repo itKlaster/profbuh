@@ -1,4 +1,4 @@
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Typography, Button } from "@material-tailwind/react";
 // import { useEffect } from "react";
 import { useArticles } from "../hooks/use-articals";
@@ -10,14 +10,14 @@ import { Link } from "react-router-dom";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 
 export const Article = () => {
-  // let { id } = useParams();
+  let { id } = useParams();
   const [topics, setTopics] = useState();
   const { article, getArticle } = useArticles();
   const fullImage = useExpandedImage();
 
-  // useEffect(() => {
-  //   getArticle(id);
-  // }, []);
+  useEffect(() => {
+    getArticle(id);
+  }, []);
 
   useEffect(() => {
     if (article) {
