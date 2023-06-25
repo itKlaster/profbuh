@@ -119,6 +119,7 @@ export const Article = () => {
                         key={index}
                         className="m-0 rounded-xl flex-grow"
                         onClick={() =>
+                          fullImage.showImage(image.startsWith('http') ? image : "data:image/png;base64," + image)
                         }
                       >
                         <img
